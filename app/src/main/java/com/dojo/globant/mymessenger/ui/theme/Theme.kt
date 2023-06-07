@@ -1,9 +1,10 @@
 package com.dojo.globant.mymessenger.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
@@ -27,18 +28,26 @@ private val LightColorPalette = lightColors(
     */
 )
 
+private val LightColorScheme = lightColorScheme(
+    primary = PrimaryBlue,
+    onPrimary = White,
+    primaryContainer = SkyBlue,
+    onPrimaryContainer = Title,
+// ..
+)
+
 @Composable
 fun MyMessengerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        LightColorScheme
     } else {
-        LightColorPalette
+        LightColorScheme
     }
 
     MaterialTheme(
-        colors = colors,
-        typography = Typography,
+        colorScheme = colors,
         shapes = Shapes,
+        typography = Typography,
         content = content
     )
 }

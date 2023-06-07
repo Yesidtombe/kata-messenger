@@ -1,16 +1,21 @@
 package com.dojo.globant.mymessenger.common.composables.textfield
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +30,7 @@ fun MyGenericTextField(
     errorMessage: UiText? = null,
     @StringRes label: Int? = null,
     @StringRes placeholder: Int? = null,
+    startIcon: ImageVector? = null,
     isEnabled: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None
@@ -36,6 +42,7 @@ fun MyGenericTextField(
             isError = errorMessage != null,
             label = label,
             placeholder = placeholder,
+            startIcon = startIcon,
             isEnabled = isEnabled,
             keyboardOptions = keyboardOptions,
             visualTransformation = visualTransformation
@@ -58,8 +65,9 @@ fun MyOutlinedTextField(
     text: String,
     onValueChange: (String) -> Unit,
     isError: Boolean,
-    @StringRes label: Int? = null,
-    @StringRes placeholder: Int? = null,
+    @StringRes label: Int?,
+    @StringRes placeholder: Int?,
+    startIcon: ImageVector?,
     isEnabled: Boolean,
     keyboardOptions: KeyboardOptions,
     visualTransformation: VisualTransformation,
@@ -82,6 +90,9 @@ fun MyOutlinedTextField(
             }
         },
         enabled = isEnabled,
+        leadingIcon = if (startIcon != null) {
+            { Icon(imageVector = startIcon, contentDescription = null) }
+        } else null,
         shape = RoundedCornerShape(20.dp),
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
@@ -97,6 +108,7 @@ fun MyGenericTextFieldPreview() {
         text = "",
         label = R.string.app_name,
         placeholder = R.string.app_name,
-        onValueChange = { }
+        onValueChange = { },
+        startIcon = Icons.Default.Add
     )
 }

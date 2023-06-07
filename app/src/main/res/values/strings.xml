@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyMessenger</string>
+    <string name="text_field_phone">Phone</string>
+    <string name="text_field_password">Password</string>
+    <string name="text_sign_in">Sign In</string>
+    <string name="text_for_signing_up">First time here? Sign Up</string>
 </resources>
