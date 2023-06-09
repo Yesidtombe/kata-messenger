@@ -1,6 +1,5 @@
 package com.dojo.globant.mymessenger.feature.sign_in.domain.usecase
 
-import androidx.core.text.isDigitsOnly
 import com.dojo.globant.mymessenger.R
 import com.dojo.globant.mymessenger.common.util.UiText
 import com.dojo.globant.mymessenger.common.util.ValidationResult
@@ -15,7 +14,7 @@ class ValidateFieldsUseCase {
                     errorMessage = UiText.StringResource(id = R.string.field_required_error)
                 )
             }
-            if (!isDigitsOnly()) {
+            if (any { character -> !character.isDigit() }) {
                 return ValidationResult(
                     successful = false,
                     errorMessage = UiText.StringResource(id = R.string.phone_invalid_error)
