@@ -4,4 +4,7 @@
     <string name="text_field_password">Password</string>
     <string name="text_sign_in">Sign In</string>
     <string name="text_for_signing_up">First time here? Sign Up</string>
+    <string name="field_required_error">This field is required</string>
+    <string name="phone_invalid_error">The phone is invalid</string>
+    <string name="phone_invalid_amount_digits">The phone must contain 10 digits</string>
 </resources>

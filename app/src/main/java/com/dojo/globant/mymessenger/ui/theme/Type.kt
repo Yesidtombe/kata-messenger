@@ -21,6 +21,9 @@ val Typography = Typography(
         fontFamily = Inter,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = Inter
     )
     /* Other default text styles to override
     button = TextStyle(
