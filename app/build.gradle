@@ -71,6 +71,10 @@ dependencies {
     // Coil
     implementation "io.coil-kt:coil-compose:$coilVersion"
 
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:$navigationVersion"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$animationNavigationVersion"
+
     // Datastore preferences
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 

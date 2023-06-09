@@ -10,7 +10,6 @@ import com.dojo.globant.mymessenger.feature.sign_in.domain.usecase.ValidateField
 import com.dojo.globant.mymessenger.feature.sign_in.ui.SignInEvent
 import com.dojo.globant.mymessenger.feature.sign_in.ui.SignInUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,13 +30,13 @@ class SignInViewModel @Inject constructor(
             is SignInEvent.PasswordChanged -> {
                 state = state.copy(password = event.password)
             }
-            SignInEvent.OnSignIn -> {
-                validateData()
+            is SignInEvent.OnSignIn -> {
+                validateData(event.goToHome)
             }
         }
     }
 
-    private fun validateData() {
+    private fun validateData(goToHome: () -> Unit) {
         val phoneResult = validateFieldsUseCase.validatePhone(state.phone)
         val passwordResult = validateFieldsUseCase.validatePassword(state.password)
         val hasError = listOf(
@@ -53,8 +52,9 @@ class SignInViewModel @Inject constructor(
         if (hasError)
             return
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             signInUseCase.signIn(state.phone)
+            goToHome()
         }
     }
 

@@ -28,7 +28,8 @@ import com.dojo.globant.mymessenger.ui.theme.Typography
 
 @Composable
 fun SignInScreen(
-    viewModel: SignInViewModel = hiltViewModel()
+    viewModel: SignInViewModel = hiltViewModel(),
+    onNavigateHomeScreen: () -> Unit
 ) {
     val keyboardOptions = KeyboardOptions(
         keyboardType = KeyboardType.Phone,
@@ -77,7 +78,7 @@ fun SignInScreen(
         }
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = { viewModel.onEvent(SignInEvent.OnSignIn) },
+            onClick = { viewModel.onEvent(SignInEvent.OnSignIn { onNavigateHomeScreen() }) },
             shape = Shapes.small
         ) {
             Text(text = stringResource(R.string.text_sign_in))
@@ -88,5 +89,5 @@ fun SignInScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MySignInPreview() {
-    SignInScreen()
+    SignInScreen { }
 }

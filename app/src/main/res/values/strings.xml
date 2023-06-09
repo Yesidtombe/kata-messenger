@@ -7,4 +7,7 @@
     <string name="field_required_error">This field is required</string>
     <string name="phone_invalid_error">The phone is invalid</string>
     <string name="phone_invalid_amount_digits">The phone must contain 10 digits</string>
+    <string name="list_chat_item">Chats</string>
+    <string name="new_chat_item">New</string>
+    <string name="profile_item">Profile</string>
 </resources>
