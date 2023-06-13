@@ -1,4 +1,4 @@
-package com.dojo.globant.mymessenger.feature.chat.home.viewmodel
+package com.dojo.globant.mymessenger.feature.home.root.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class SplashViewModel @Inject constructor(
     private val userManager: UserManager
 ) : ViewModel() {
 

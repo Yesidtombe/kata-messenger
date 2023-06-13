@@ -25,6 +25,7 @@ import com.dojo.globant.mymessenger.ui.theme.Typography
 
 @Composable
 fun MyGenericTextField(
+    modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
     errorMessage: UiText? = null,
@@ -35,7 +36,7 @@ fun MyGenericTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth()) {
         MyOutlinedTextField(
             text = text,
             onValueChange = onValueChange,

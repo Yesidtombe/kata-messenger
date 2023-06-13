@@ -1,4 +1,4 @@
-package com.dojo.globant.mymessenger.feature.chat.home.view.components
+package com.dojo.globant.mymessenger.feature.home.root.view.components
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem

@@ -1,4 +1,4 @@
-package com.dojo.globant.mymessenger.feature.chat.home.view
+package com.dojo.globant.mymessenger.feature.home.root.view
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material3.Scaffold
@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.dojo.globant.mymessenger.core.navigation.Destinations
 import com.dojo.globant.mymessenger.core.navigation.graphs.HomeNavGraph
-import com.dojo.globant.mymessenger.feature.chat.home.view.components.BottomNavigationBar
+import com.dojo.globant.mymessenger.feature.home.root.view.components.BottomNavigationBar
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalAnimationApi::class)

@@ -1,16 +1,15 @@
 package com.dojo.globant.mymessenger.core.navigation.graphs
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 import com.dojo.globant.mymessenger.core.navigation.Destinations
+import com.dojo.globant.mymessenger.feature.home.chat.ui.view.ChatScreen
+import com.dojo.globant.mymessenger.feature.home.list.ui.view.ListChatScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -26,7 +25,9 @@ fun HomeNavGraph(
         startDestination = Destinations.ListChatScreen.route
     ) {
         composable(route = Destinations.ListChatScreen.route) {
-            Text(modifier = Modifier.padding(paddingValues).clickable { navController.navigate(Graph.CHAT) }, text = "List chats")
+            ListChatScreen(paddingValues = paddingValues) {
+                navController.navigate(Graph.CHAT)
+            }
         }
         composable(route = Destinations.NewChatScreen.route) {
             Text(text = "New chat")
@@ -45,7 +46,7 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
         startDestination = ChatScreen.Conversation.route
     ) {
         composable(route = ChatScreen.Conversation.route) {
-            Text(modifier = Modifier.clickable { navController.popBackStack() }, text = "Conversation")
+            ChatScreen()
         }
     }
 }

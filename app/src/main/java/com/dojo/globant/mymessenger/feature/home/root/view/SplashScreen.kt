@@ -1,4 +1,4 @@
-package com.dojo.globant.mymessenger.feature.chat.home.view
+package com.dojo.globant.mymessenger.feature.home.root.view
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -8,28 +8,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.dojo.globant.mymessenger.R
-import com.dojo.globant.mymessenger.core.navigation.graphs.Graph
-import com.dojo.globant.mymessenger.feature.chat.home.ViewState
-import com.dojo.globant.mymessenger.feature.chat.home.viewmodel.HomeViewModel
+import com.dojo.globant.mymessenger.feature.home.root.viewmodel.SplashViewModel
 import com.dojo.globant.mymessenger.ui.theme.SkyBlue
 import com.dojo.globant.mymessenger.ui.theme.White
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+    viewModel: SplashViewModel = hiltViewModel(),
     onNavigateToLoginScreen: () -> Unit,
     onNavigateToHomeScreen: () -> Unit
 ) {

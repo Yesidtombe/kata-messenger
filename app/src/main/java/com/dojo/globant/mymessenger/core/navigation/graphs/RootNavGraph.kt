@@ -3,8 +3,8 @@ package com.dojo.globant.mymessenger.core.navigation.graphs
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.dojo.globant.mymessenger.feature.chat.home.view.HomeScreen
-import com.dojo.globant.mymessenger.feature.chat.home.view.SplashScreen
+import com.dojo.globant.mymessenger.feature.home.root.view.HomeScreen
+import com.dojo.globant.mymessenger.feature.home.root.view.SplashScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
