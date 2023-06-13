@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.dojo.globant.mymessenger.core.navigation.graphs.RootNavigationGraph
 import com.dojo.globant.mymessenger.ui.theme.MyMessengerTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -19,7 +18,6 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
         setContent {
             MyMessengerTheme {
                 // A surface container using the 'background' color from the theme

@@ -10,4 +10,5 @@
     <string name="list_chat_item">Chats</string>
     <string name="new_chat_item">New</string>
     <string name="profile_item">Profile</string>
+    <string name="cd_logo_icon">Logo icon</string>
 </resources>

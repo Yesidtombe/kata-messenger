@@ -4,7 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.dojo.globant.mymessenger.feature.chat.home.view.HomeScreen
-import com.dojo.globant.mymessenger.feature.chat.home.view.MainScreen
+import com.dojo.globant.mymessenger.feature.chat.home.view.SplashScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -18,7 +18,7 @@ fun RootNavigationGraph(navController: NavHostController) {
     ) {
         authNavGraph(navController = navController)
         composable(route = Graph.MAIN) {
-            MainScreen(
+            SplashScreen(
                 onNavigateToLoginScreen = {
                     navController.popBackStack()
                     navController.navigate(route = Graph.AUTHENTICATION)
