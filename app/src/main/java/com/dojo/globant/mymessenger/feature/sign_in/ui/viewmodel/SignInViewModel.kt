@@ -10,6 +10,7 @@ import com.dojo.globant.mymessenger.feature.sign_in.domain.usecase.ValidateField
 import com.dojo.globant.mymessenger.feature.sign_in.ui.SignInEvent
 import com.dojo.globant.mymessenger.feature.sign_in.ui.SignInUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -53,8 +54,11 @@ class SignInViewModel @Inject constructor(
             return
 
         viewModelScope.launch {
-            signInUseCase.signIn(state.phone)
-            goToHome()
+            signInUseCase.signIn(state.phone).catch {
+
+            }.collect {
+                goToHome()
+            }
         }
     }
 

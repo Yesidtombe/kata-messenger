@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import kotlinx.coroutines.Dispatchers
 
 @InstallIn(ViewModelComponent::class)
 @Module
@@ -15,7 +16,7 @@ object SignInModule {
 
     @Provides
     fun provideSignInUseCase(repository: SignInRepository): SignInUseCase =
-        SignInUseCase(repository)
+        SignInUseCase(repository, Dispatchers.IO)
 
     @Provides
     fun provideValidateFieldsUseCase(): ValidateFieldsUseCase =
