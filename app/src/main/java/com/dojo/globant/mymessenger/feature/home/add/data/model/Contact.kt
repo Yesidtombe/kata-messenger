@@ -5,5 +5,4 @@ data class Contact(
     val name: String
 ) {
     var numbers = ArrayList<String>()
-    var emails = ArrayList<String>()
 }
