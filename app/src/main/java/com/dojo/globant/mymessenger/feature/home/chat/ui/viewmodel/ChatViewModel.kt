@@ -22,15 +22,15 @@ class ChatViewModel @Inject constructor(
     private val _messageState = mutableStateOf("")
     val messageState: MutableState<String> get() = _messageState
 
-    private val _listChatState: MutableList<ChatState> = mutableStateListOf()
-    val listChatState: MutableList<ChatState>
-        get() = _listChatState
+    private val _listMessageState: MutableList<ChatState> = mutableStateListOf()
+    val listMessageState: MutableList<ChatState>
+        get() = _listMessageState
 
     init {
         viewModelScope.launch {
             getAllMessagesUseCase.getAllMessages().collect { result ->
-                _listChatState.clear()
-                _listChatState.addAll(result.map { it.toChatState() })
+                _listMessageState.clear()
+                _listMessageState.addAll(result.map { it.toChatState() })
             }
         }
     }
@@ -39,10 +39,10 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             sendMessageUseCase.sendMessage(content, idRecipient.toString()).collect { result ->
                 if (result.id.isBlank())
-                    _listChatState.add(ChatState())
+                    _listMessageState.add(ChatState())
                 else {
                     _messageState.value = ""
-                    _listChatState.add(ChatState(message = result))
+                    _listMessageState.add(ChatState(message = result))
                 }
 
             }

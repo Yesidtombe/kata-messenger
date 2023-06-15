@@ -19,12 +19,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dojo.globant.mymessenger.R
+import com.dojo.globant.mymessenger.feature.home.add.data.model.Contact
 import com.dojo.globant.mymessenger.ui.theme.Body
 import com.dojo.globant.mymessenger.ui.theme.Green
 import com.dojo.globant.mymessenger.ui.theme.Typography
 
 @Composable
-fun ItemChat(onClickChat: () -> Unit) {
+fun ItemChat(
+    contact: Contact,
+    onClickChat: () -> Unit
+) {
     Row(
         modifier = Modifier.clickable { onClickChat() },
         horizontalArrangement = Arrangement.Start,
@@ -43,13 +47,13 @@ fun ItemChat(onClickChat: () -> Unit) {
             .weight(4f)
             .padding(8.dp)) {
             Text(
-                text = "Jayden Lavoie",
+                text = contact.name,
                 style = Typography.bodyLarge,
                 fontSize = 17.sp
             )
             Row (verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "Did you pass the psychology...",
+                    text = "...",
                     color = Body,
                     fontSize = 14.sp,
                     maxLines = 1

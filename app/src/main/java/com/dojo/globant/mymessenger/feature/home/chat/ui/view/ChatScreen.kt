@@ -32,7 +32,7 @@ fun ChatScreen(
     viewModel: ChatViewModel = hiltViewModel()
 ) {
     val message = viewModel.messageState
-    val state = viewModel.listChatState
+    val state = viewModel.listMessageState
 
     Column(Modifier.fillMaxSize()) {
         HeaderChat(

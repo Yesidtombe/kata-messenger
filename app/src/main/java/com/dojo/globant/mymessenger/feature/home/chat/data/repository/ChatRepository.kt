@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import javax.inject.Named
 
 @ViewModelScoped
 class ChatRepository @Inject constructor(
-    private val messageList: CollectionReference
+    @Named("messages") private val messageList: CollectionReference
 ) {
 
     fun addNewMessage(message: Message) {

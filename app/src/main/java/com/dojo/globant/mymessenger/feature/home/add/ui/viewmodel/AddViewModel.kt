@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dojo.globant.mymessenger.feature.home.add.data.model.Contact
 import com.dojo.globant.mymessenger.feature.home.add.domain.usecase.GetAllContactsUseCase
+import com.dojo.globant.mymessenger.feature.home.add.domain.usecase.SaveNewChatUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddViewModel @Inject constructor(
-    private val getAllContactsUseCase: GetAllContactsUseCase
+    private val getAllContactsUseCase: GetAllContactsUseCase,
+    private val saveNewChatUseCase: SaveNewChatUseCase
 ) : ViewModel() {
 
     private val _contactsState = mutableStateListOf<Contact>()
@@ -36,6 +38,13 @@ class AddViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 _contactsState.clear()
                 _contactsState.addAll(contacts)
+            }
+        }
+    }
+
+    fun saveNewChat(contact: Contact) {
+        viewModelScope.launch {
+            saveNewChatUseCase.saveChat(contact).collect{
             }
         }
     }

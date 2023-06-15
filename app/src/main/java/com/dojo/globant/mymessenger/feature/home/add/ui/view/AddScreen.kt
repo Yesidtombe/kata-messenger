@@ -41,7 +41,7 @@ fun AddScreen(
             ) {
                 items(contacts){
                     ItemContact(it) {
-                        viewModel.getContacts()
+                        viewModel.saveNewChat(it)
                         onClickContact()
                     }
                 }
