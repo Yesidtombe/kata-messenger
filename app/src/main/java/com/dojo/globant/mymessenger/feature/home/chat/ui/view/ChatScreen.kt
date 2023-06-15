@@ -4,12 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,18 +23,16 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dojo.globant.mymessenger.R
 import com.dojo.globant.mymessenger.common.composables.textfield.MyGenericTextField
+import com.dojo.globant.mymessenger.feature.home.chat.ui.view.composables.ItemMessage
 import com.dojo.globant.mymessenger.feature.home.chat.ui.viewmodel.ChatViewModel
-import com.dojo.globant.mymessenger.ui.theme.Body
-import com.dojo.globant.mymessenger.ui.theme.Green
-import com.dojo.globant.mymessenger.ui.theme.Typography
-import com.dojo.globant.mymessenger.ui.theme.White
+import com.dojo.globant.mymessenger.ui.theme.*
 
 @Composable
 fun ChatScreen(
     viewModel: ChatViewModel = hiltViewModel()
 ) {
-    var message by remember { mutableStateOf("") }
-    //val state = viewModel.state
+    val message = viewModel.messageState
+    val state = viewModel.listChatState
 
     Column(Modifier.fillMaxSize()) {
         HeaderChat(
@@ -40,8 +40,20 @@ fun ChatScreen(
                 .weight(1f)
                 .padding(horizontal = 12.dp)
         )
-        Surface(Modifier.weight(8f)) {
-
+        Surface(
+            Modifier
+                .weight(8f)
+                .padding(8.dp)
+                .background(Background)) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+                horizontalAlignment = Alignment.End
+            ) {
+                items(state) {
+                    ItemMessage(it.message)
+                }
+            }
         }
         Row(
             modifier = Modifier
@@ -51,13 +63,13 @@ fun ChatScreen(
         ) {
             MyGenericTextField(
                 modifier = Modifier.weight(8f),
-                text = message,
-                onValueChange = { message = it })
+                text = message.value,
+                onValueChange = { viewModel.onMessageChanged(it) })
             Button(
                 modifier = Modifier.weight(2f),
                 shape = CircleShape,
                 onClick = {
-                    viewModel.newMessage(message)
+                    viewModel.newMessage(message.value, 315)
                 }) {
                 Icon(imageVector = Icons.Default.Send, contentDescription = null)
             }

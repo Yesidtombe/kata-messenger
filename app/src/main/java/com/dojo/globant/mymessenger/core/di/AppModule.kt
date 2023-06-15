@@ -2,6 +2,7 @@ package com.dojo.globant.mymessenger.core.di
 
 import android.content.Context
 import com.dojo.globant.mymessenger.core.datastore.UserManager
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,4 +18,14 @@ object AppModule {
     @Provides
     fun provideUserManager(@ApplicationContext context: Context) =
         UserManager(context)
+
+    @Provides
+    @Singleton
+    fun provideFirestoreInstance() = FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideMessageList(
+        firestore: FirebaseFirestore
+    ) = firestore.collection("messages")
 }

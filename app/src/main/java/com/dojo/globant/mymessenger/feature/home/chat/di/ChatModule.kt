@@ -1,23 +1,25 @@
 package com.dojo.globant.mymessenger.feature.home.chat.di
 
-import com.google.firebase.firestore.FirebaseFirestore
+import com.dojo.globant.mymessenger.core.datastore.UserManager
+import com.dojo.globant.mymessenger.feature.home.chat.data.repository.ChatRepository
+import com.dojo.globant.mymessenger.feature.home.chat.domain.usecase.GetAllMessagesUseCase
+import com.dojo.globant.mymessenger.feature.home.chat.domain.usecase.SendMessageUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import kotlinx.coroutines.Dispatchers
 
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 @Module
 object ChatModule {
 
     @Provides
-    @Singleton
-    fun provideFirestoreInstance() = FirebaseFirestore.getInstance()
+    fun provideSendMessageUseCase(repository: ChatRepository, userManager: UserManager): SendMessageUseCase =
+        SendMessageUseCase(repository, userManager, Dispatchers.IO)
 
     @Provides
-    @Singleton
-    fun provideMessageList(
-        firestore: FirebaseFirestore
-    ) = firestore.collection("messages")
+    fun provideGetAllMessagesUseCase(repository: ChatRepository, userManager: UserManager): GetAllMessagesUseCase =
+        GetAllMessagesUseCase(repository, userManager, Dispatchers.IO)
+
 }

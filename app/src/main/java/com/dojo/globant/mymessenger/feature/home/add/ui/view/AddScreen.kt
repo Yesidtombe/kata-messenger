@@ -40,7 +40,10 @@ fun AddScreen(
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 items(contacts){
-                    ItemContact(it, onClickContact)
+                    ItemContact(it) {
+                        viewModel.getContacts()
+                        onClickContact()
+                    }
                 }
             }
         }
