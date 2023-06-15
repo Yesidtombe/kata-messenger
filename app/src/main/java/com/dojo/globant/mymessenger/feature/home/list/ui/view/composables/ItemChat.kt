@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Divider
@@ -19,14 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dojo.globant.mymessenger.R
-import com.dojo.globant.mymessenger.feature.home.add.data.model.Contact
+import com.dojo.globant.mymessenger.feature.home.list.data.model.Chat
 import com.dojo.globant.mymessenger.ui.theme.Body
 import com.dojo.globant.mymessenger.ui.theme.Green
 import com.dojo.globant.mymessenger.ui.theme.Typography
 
 @Composable
 fun ItemChat(
-    contact: Contact,
+    chat: Chat,
     onClickChat: () -> Unit
 ) {
     Row(
@@ -47,7 +46,7 @@ fun ItemChat(
             .weight(4f)
             .padding(8.dp)) {
             Text(
-                text = contact.name,
+                text = chat.contact.name,
                 style = Typography.bodyLarge,
                 fontSize = 17.sp
             )

@@ -12,6 +12,6 @@ class GetAllMessagesUseCase(
     private val userManager: UserManager,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun getAllMessages(): Flow<List<Message>> =
-        repository.getMessageList().flowOn(dispatcher)
+    suspend fun getAllMessages(to: String): Flow<List<Message>> =
+        repository.getMessageList(from = userManager.getUserPhone(), to).flowOn(dispatcher)
 }

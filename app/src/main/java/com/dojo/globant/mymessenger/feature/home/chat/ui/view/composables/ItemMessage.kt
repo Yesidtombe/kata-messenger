@@ -19,7 +19,8 @@ import com.dojo.globant.mymessenger.ui.theme.*
 
 @Composable
 fun ItemMessage(
-    message: Message
+    message: Message,
+    time: String
 ) {
     Card(
         shape = RoundedCornerShape(
@@ -42,7 +43,7 @@ fun ItemMessage(
                 .padding(end = 12.dp, bottom = 12.dp)
                 .align(End),
             textAlign = TextAlign.End,
-            text = "7:45 PM",
+            text = time,
             style = Typography.labelSmall,
             fontSize = 12.sp,
             color = Stroke
@@ -54,6 +55,6 @@ fun ItemMessage(
 @Composable
 fun MyPreviewItemMessage() {
     Box(Modifier.background(Green)) {
-        ItemMessage(Message())
+        ItemMessage(Message(), "")
     }
 }

@@ -23,8 +23,8 @@ class ChatRepository @Inject constructor(
         }
     }
 
-    suspend fun getMessageList(): Flow<List<Message>> = flow {
-        val messages = messageList.get().await().map { document ->
+    suspend fun getMessageList(from: String, to: String): Flow<List<Message>> = flow {
+        val messages = messageList.whereEqualTo("from", from).whereEqualTo("to",to).get().await().map { document ->
             document.toObject(Message::class.java)
         }
         emit(messages)

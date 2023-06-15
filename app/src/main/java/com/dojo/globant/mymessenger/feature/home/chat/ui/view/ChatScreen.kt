@@ -12,11 +12,13 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,8 +31,15 @@ import com.dojo.globant.mymessenger.ui.theme.*
 
 @Composable
 fun ChatScreen(
+    id: String,
+    name: String,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getAllMessages(id)
+    }
+
     val message = viewModel.messageState
     val state = viewModel.listMessageState
 
@@ -38,7 +47,8 @@ fun ChatScreen(
         HeaderChat(
             Modifier
                 .weight(1f)
-                .padding(horizontal = 12.dp)
+                .padding(horizontal = 12.dp),
+            name
         )
         Surface(
             Modifier
@@ -51,7 +61,7 @@ fun ChatScreen(
                 horizontalAlignment = Alignment.End
             ) {
                 items(state) {
-                    ItemMessage(it.message)
+                    ItemMessage(it.message, it.time)
                 }
             }
         }
@@ -69,7 +79,7 @@ fun ChatScreen(
                 modifier = Modifier.weight(2f),
                 shape = CircleShape,
                 onClick = {
-                    viewModel.newMessage(message.value, 315)
+                    viewModel.newMessage(message.value, id)
                 }) {
                 Icon(imageVector = Icons.Default.Send, contentDescription = null)
             }
@@ -79,7 +89,7 @@ fun ChatScreen(
 }
 
 @Composable
-fun HeaderChat(modifier: Modifier) {
+fun HeaderChat(modifier: Modifier, name: String) {
     Row(
         modifier = modifier
             .clickable { }
@@ -89,7 +99,7 @@ fun HeaderChat(modifier: Modifier) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.avatar_profile),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.default_image_profile),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(60.dp)
@@ -102,12 +112,12 @@ fun HeaderChat(modifier: Modifier) {
                 .padding(8.dp)
         ) {
             Text(
-                text = "Jayden Lavoie",
+                text = name,
                 style = Typography.bodyLarge,
                 fontSize = 17.sp
             )
             Text(
-                text = "Status",
+                text = stringResource(R.string.status_chat_person),
                 color = Body,
                 fontSize = 14.sp,
                 maxLines = 1
@@ -132,5 +142,5 @@ fun HeaderChat(modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MyChatPreview() {
-    ChatScreen()
+    ChatScreen("1", "Robert")
 }

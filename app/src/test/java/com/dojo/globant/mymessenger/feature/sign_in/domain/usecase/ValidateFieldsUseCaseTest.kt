@@ -1,7 +1,7 @@
 package com.dojo.globant.mymessenger.feature.sign_in.domain.usecase
 
-import org.junit.Assert.*
-
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Before
 import org.junit.Test
 

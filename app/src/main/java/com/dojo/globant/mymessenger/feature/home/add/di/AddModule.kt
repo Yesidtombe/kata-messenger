@@ -1,6 +1,7 @@
 package com.dojo.globant.mymessenger.feature.home.add.di
 
 import android.app.Application
+import com.dojo.globant.mymessenger.core.datastore.UserManager
 import com.dojo.globant.mymessenger.feature.home.add.data.repository.GetAllContactsRepository
 import com.dojo.globant.mymessenger.feature.home.add.data.repository.SaveChatRepository
 import com.dojo.globant.mymessenger.feature.home.add.domain.usecase.GetAllContactsUseCase
@@ -24,6 +25,6 @@ object AddModule {
         GetAllContactsUseCase(repository)
 
     @Provides
-    fun provideSaveNewChatUseCase(repository: SaveChatRepository): SaveNewChatUseCase =
-        SaveNewChatUseCase(repository, Dispatchers.IO)
+    fun provideSaveNewChatUseCase(repository: SaveChatRepository, userManager: UserManager): SaveNewChatUseCase =
+        SaveNewChatUseCase(repository, userManager, Dispatchers.IO)
 }

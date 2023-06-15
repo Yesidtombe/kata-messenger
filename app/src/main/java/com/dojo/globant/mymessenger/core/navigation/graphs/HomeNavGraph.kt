@@ -26,13 +26,13 @@ fun HomeNavGraph(
         startDestination = Destinations.ListChatScreen.route
     ) {
         composable(route = Destinations.ListChatScreen.route) {
-            ListChatScreen(paddingValues = paddingValues) {
-                navController.navigate(Graph.CHAT)
+            ListChatScreen(paddingValues = paddingValues) { id, name ->
+                navController.navigate("${ChatScreen.Conversation.route}/$id/$name")
             }
         }
         composable(route = Destinations.NewChatScreen.route) {
-            AddScreen(paddingValues = paddingValues) {
-                navController.navigate(Graph.CHAT)
+            AddScreen(paddingValues = paddingValues) { id, name ->
+                navController.navigate("${ChatScreen.Conversation.route}/$id/$name")
             }
         }
         composable(route = Destinations.ProfileScreen.route) {
@@ -48,8 +48,8 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController) {
         route = Graph.CHAT,
         startDestination = ChatScreen.Conversation.route
     ) {
-        composable(route = ChatScreen.Conversation.route) {
-            ChatScreen()
+        composable(route = "${ChatScreen.Conversation.route}/{id}/{name}") {
+            ChatScreen(id = it.arguments?.getString("id").orEmpty(), name = it.arguments?.getString("name").orEmpty())
         }
     }
 }

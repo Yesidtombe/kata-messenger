@@ -5,4 +5,6 @@ data class Contact(
     val name: String
 ) {
     var numbers = ArrayList<String>()
+
+    constructor(): this("", "")
 }

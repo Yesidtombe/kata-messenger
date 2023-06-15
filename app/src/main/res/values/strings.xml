@@ -13,4 +13,6 @@
     <string name="cd_logo_icon">Logo icon</string>
     <string name="contact_permission_rationale">Please grant contact read permissions</string>
     <string name="button_edit_profile">Edit profile</string>
+    <string name="status_chat_person">Online</string>
+    <string name="default_image_profile">Default image profile</string>
 </resources>

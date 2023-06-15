@@ -17,7 +17,7 @@ import com.dojo.globant.mymessenger.ui.theme.Background
 fun ListChatScreen(
     viewModel: ListViewModel = hiltViewModel(),
     paddingValues: PaddingValues,
-    onClickChat: () -> Unit
+    onClickChat: (String, String) -> Unit
 ) {
 
     val state = viewModel.listChatState
@@ -36,7 +36,7 @@ fun ListChatScreen(
             ) {
                 items(state){
                     ItemChat(it) {
-                        onClickChat()
+                        onClickChat(it.contact.id, it.contact.name)
                     }
                 }
             }
@@ -47,5 +47,5 @@ fun ListChatScreen(
 @Preview(showBackground = true)
 @Composable
 fun MyListChatPreview() {
-    ListChatScreen(paddingValues = PaddingValues(8.dp)) { }
+    ListChatScreen(paddingValues = PaddingValues(8.dp)) { _, _ -> }
 }

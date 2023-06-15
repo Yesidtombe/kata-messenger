@@ -1,5 +1,6 @@
 package com.dojo.globant.mymessenger.feature.home.list.di
 
+import com.dojo.globant.mymessenger.core.datastore.UserManager
 import com.dojo.globant.mymessenger.feature.home.list.data.repository.ListRepository
 import com.dojo.globant.mymessenger.feature.home.list.domain.usecase.GetAllChatsUseCase
 import dagger.Module
@@ -13,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 object ListModule {
 
     @Provides
-    fun provideGetAllChatsUseCase(repository: ListRepository): GetAllChatsUseCase =
-        GetAllChatsUseCase(repository, Dispatchers.IO)
+    fun provideGetAllChatsUseCase(repository: ListRepository, userManager: UserManager): GetAllChatsUseCase =
+        GetAllChatsUseCase(repository, userManager, Dispatchers.IO)
 
 }

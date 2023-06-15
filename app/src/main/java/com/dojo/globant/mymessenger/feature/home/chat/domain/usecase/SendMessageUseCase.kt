@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import java.util.UUID
+import java.util.*
 
 class SendMessageUseCase(
     private val repository: ChatRepository,
@@ -20,7 +20,8 @@ class SendMessageUseCase(
             id = UUID.randomUUID().toString(),
             content = content,
             from = userManager.getUserPhone(),
-            to = idRecipient
+            to = idRecipient,
+            time = Date().time
         )
         return flow {
             repository.addNewMessage(message)

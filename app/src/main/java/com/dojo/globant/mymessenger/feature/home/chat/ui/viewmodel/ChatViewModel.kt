@@ -26,23 +26,23 @@ class ChatViewModel @Inject constructor(
     val listMessageState: MutableList<ChatState>
         get() = _listMessageState
 
-    init {
+    fun getAllMessages(to: String) {
         viewModelScope.launch {
-            getAllMessagesUseCase.getAllMessages().collect { result ->
+            getAllMessagesUseCase.getAllMessages(to).collect { result ->
                 _listMessageState.clear()
-                _listMessageState.addAll(result.map { it.toChatState() })
+                _listMessageState.addAll(result.sortedBy { it.time }.map { it.toChatState() })
             }
         }
     }
 
-    fun newMessage(content: String, idRecipient: Int) {
+    fun newMessage(content: String, idRecipient: String) {
         viewModelScope.launch {
-            sendMessageUseCase.sendMessage(content, idRecipient.toString()).collect { result ->
+            sendMessageUseCase.sendMessage(content, idRecipient).collect { result ->
                 if (result.id.isBlank())
                     _listMessageState.add(ChatState())
                 else {
                     _messageState.value = ""
-                    _listMessageState.add(ChatState(message = result))
+                    _listMessageState.add(result.toChatState())
                 }
 
             }

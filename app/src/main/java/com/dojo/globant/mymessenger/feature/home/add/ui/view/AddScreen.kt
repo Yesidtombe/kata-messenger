@@ -18,7 +18,7 @@ import com.dojo.globant.mymessenger.ui.theme.Background
 fun AddScreen(
     viewModel: AddViewModel = hiltViewModel(),
     paddingValues: PaddingValues,
-    onClickContact: () -> Unit
+    onClickContact: (String, String) -> Unit
 ) {
 
     LaunchedEffect(key1 = Unit) {
@@ -42,7 +42,7 @@ fun AddScreen(
                 items(contacts){
                     ItemContact(it) {
                         viewModel.saveNewChat(it)
-                        onClickContact()
+                        onClickContact(it.id, it.name)
                     }
                 }
             }
@@ -53,5 +53,5 @@ fun AddScreen(
 @Preview(showBackground = true)
 @Composable
 fun MyListChatPreview() {
-    AddScreen(paddingValues = PaddingValues(8.dp)) { }
+    AddScreen(paddingValues = PaddingValues(8.dp)) { _, _ -> }
 }
