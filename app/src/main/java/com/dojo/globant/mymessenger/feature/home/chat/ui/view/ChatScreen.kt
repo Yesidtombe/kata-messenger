@@ -31,7 +31,6 @@ import com.dojo.globant.mymessenger.ui.theme.White
 fun ChatScreen(
     viewModel: ChatViewModel = hiltViewModel()
 ) {
-
     var message by remember { mutableStateOf("") }
     //val state = viewModel.state
 
@@ -39,7 +38,8 @@ fun ChatScreen(
         HeaderChat(
             Modifier
                 .weight(1f)
-                .padding(horizontal = 12.dp))
+                .padding(horizontal = 12.dp)
+        )
         Surface(Modifier.weight(8f)) {
 
         }
@@ -49,13 +49,16 @@ fun ChatScreen(
                 .padding(horizontal = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MyGenericTextField(modifier = Modifier.weight(8f), text = message, onValueChange = { message = it })
+            MyGenericTextField(
+                modifier = Modifier.weight(8f),
+                text = message,
+                onValueChange = { message = it })
             Button(
                 modifier = Modifier.weight(2f),
                 shape = CircleShape,
                 onClick = {
-                //viewModel.newMessage(message)
-            }) {
+                    viewModel.newMessage(message)
+                }) {
                 Icon(imageVector = Icons.Default.Send, contentDescription = null)
             }
         }
@@ -81,26 +84,26 @@ fun HeaderChat(modifier: Modifier) {
                 .clip(CircleShape)
                 .weight(1f)
         )
-        Column (modifier = Modifier
-            .weight(4f)
-            .padding(8.dp)) {
+        Column(
+            modifier = Modifier
+                .weight(4f)
+                .padding(8.dp)
+        ) {
             Text(
                 text = "Jayden Lavoie",
                 style = Typography.bodyLarge,
                 fontSize = 17.sp
             )
-            Row (verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = "Status",
-                    color = Body,
-                    fontSize = 14.sp,
-                    maxLines = 1
-                )
-            }
+            Text(
+                text = "Status",
+                color = Body,
+                fontSize = 14.sp,
+                maxLines = 1
+            )
         }
-        Column (modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+        Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
             Icon(
-                modifier = Modifier.clickable {  },
+                modifier = Modifier.clickable { },
                 imageVector = Icons.Default.Phone,
                 contentDescription = null,
                 tint = Green

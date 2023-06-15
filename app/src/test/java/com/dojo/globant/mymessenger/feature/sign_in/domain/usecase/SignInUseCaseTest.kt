@@ -6,9 +6,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -28,7 +26,7 @@ class SignInUseCaseTest {
     @Test
     fun `if the user is logged return true`() = runBlocking {
         // Given
-        val isUserLogged = flowOf(true)
+        val isUserLogged = true
 
         coEvery { signInRepository.isUserLogged() } returns isUserLogged
 
@@ -47,9 +45,8 @@ class SignInUseCaseTest {
     fun `when the user sign in successful return true`() = runBlocking {
         // Given
         val phone = "3113334455"
-        val saveUserLogged = flowOf(true)
 
-        coEvery { signInRepository.saveSession(phone) } returns saveUserLogged
+        coEvery { signInRepository.saveSession(phone) } returns Unit
 
         // When
         var response: Boolean? = null

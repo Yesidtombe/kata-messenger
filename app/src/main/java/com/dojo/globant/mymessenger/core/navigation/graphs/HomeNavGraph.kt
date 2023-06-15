@@ -2,14 +2,15 @@ package com.dojo.globant.mymessenger.core.navigation.graphs
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 import com.dojo.globant.mymessenger.core.navigation.Destinations
+import com.dojo.globant.mymessenger.feature.home.add.ui.view.AddScreen
 import com.dojo.globant.mymessenger.feature.home.chat.ui.view.ChatScreen
 import com.dojo.globant.mymessenger.feature.home.list.ui.view.ListChatScreen
+import com.dojo.globant.mymessenger.feature.home.profile.ui.view.ProfileScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -30,10 +31,12 @@ fun HomeNavGraph(
             }
         }
         composable(route = Destinations.NewChatScreen.route) {
-            Text(text = "New chat")
+            AddScreen(paddingValues = paddingValues) {
+                navController.navigate(Graph.CHAT)
+            }
         }
         composable(route = Destinations.ProfileScreen.route) {
-            Text(text = "Profile")
+            ProfileScreen(paddingValues = paddingValues)
         }
         detailsNavGraph(navController = navController)
     }

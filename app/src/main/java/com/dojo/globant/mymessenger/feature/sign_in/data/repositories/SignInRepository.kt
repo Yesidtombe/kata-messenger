@@ -11,17 +11,10 @@ import javax.inject.Inject
 class SignInRepository @Inject constructor(
     private val userManager: UserManager
 ) {
-    suspend fun saveSession(phone: String) = flow {
+    suspend fun saveSession(phone: String) {
         userManager.saveUserPhone(phone)
         userManager.saveIsLogged(true)
-        emit(true)
-    }.catch {
-        emit(false)
     }
 
-    suspend fun isUserLogged() = flow {
-        emit(userManager.getIsLogged().first())
-    }.catch {
-        emit(false)
-    }
+    suspend fun isUserLogged() = userManager.getIsLogged().first()
 }

@@ -2,10 +2,7 @@ package com.dojo.globant.mymessenger.feature.sign_in.domain.usecase
 
 import com.dojo.globant.mymessenger.feature.sign_in.data.repositories.SignInRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 
 class SignInUseCase(
     private val repository: SignInRepository,
@@ -19,6 +16,11 @@ class SignInUseCase(
             emit(false)
         }.flowOn(dispatcher)
 
-    suspend fun isUserLogged() = repository.isUserLogged()
+    suspend fun isUserLogged(): Flow<Boolean> =
+        flow {
+            emit(repository.isUserLogged())
+        }.catch {
+            emit(false)
+        }.flowOn(dispatcher)
 
 }

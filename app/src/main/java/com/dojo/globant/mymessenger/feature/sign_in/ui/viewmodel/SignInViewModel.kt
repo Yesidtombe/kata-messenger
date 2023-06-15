@@ -57,7 +57,8 @@ class SignInViewModel @Inject constructor(
             signInUseCase.signIn(state.phone).catch {
 
             }.collect {
-                goToHome()
+                if (it)
+                    goToHome()
             }
         }
     }
