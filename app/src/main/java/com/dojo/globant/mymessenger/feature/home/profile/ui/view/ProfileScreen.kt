@@ -8,15 +8,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.dojo.globant.mymessenger.R
+import com.dojo.globant.mymessenger.feature.home.profile.ui.viewmodel.ProfileViewModel
 import com.dojo.globant.mymessenger.ui.theme.Background
 import com.dojo.globant.mymessenger.ui.theme.Body
 import com.dojo.globant.mymessenger.ui.theme.Shapes
@@ -24,8 +28,15 @@ import com.dojo.globant.mymessenger.ui.theme.Typography
 
 @Composable
 fun ProfileScreen(
+    viewModel: ProfileViewModel = hiltViewModel(),
     paddingValues: PaddingValues
 ) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.isUserLogged()
+    }
+
+    val phone = viewModel.phoneState
+
     Column(
         modifier = Modifier.fillMaxSize().padding(paddingValues).background(Background),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -57,7 +68,7 @@ fun ProfileScreen(
                         fontSize = 18.sp
                     )
                     Text(
-                        text = "3112223344",
+                        text = phone.value,
                         color = Body,
                         fontSize = 14.sp,
                         maxLines = 1
@@ -65,10 +76,10 @@ fun ProfileScreen(
                 }
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = { /*TODO*/ },
+                    onClick = { },
                     shape = Shapes.medium
                 ) {
-                    Text(text = "Edit profile")
+                    Text(text = stringResource(R.string.button_edit_profile))
                 }
             }
         }
