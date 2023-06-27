@@ -1,6 +1,6 @@
 package com.dojo.globant.mymessenger.feature.home.chat.ui.viewmodel
 
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -20,10 +20,10 @@ class ChatViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _messageState = mutableStateOf("")
-    val messageState: MutableState<String> get() = _messageState
+    val messageState: State<String> get() = _messageState
 
     private val _listMessageState: MutableList<ChatState> = mutableStateListOf()
-    val listMessageState: MutableList<ChatState>
+    val listMessageState: List<ChatState>
         get() = _listMessageState
 
     fun getAllMessages(to: String) {

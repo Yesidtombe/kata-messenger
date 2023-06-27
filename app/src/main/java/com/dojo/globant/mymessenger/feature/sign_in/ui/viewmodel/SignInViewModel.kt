@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dojo.globant.mymessenger.common.util.Resource
 import com.dojo.globant.mymessenger.feature.sign_in.domain.usecase.SignInUseCase
 import com.dojo.globant.mymessenger.feature.sign_in.domain.usecase.ValidateFieldsUseCase
 import com.dojo.globant.mymessenger.feature.sign_in.ui.SignInEvent
@@ -23,10 +24,13 @@ class SignInViewModel @Inject constructor(
     var state by mutableStateOf(SignInUiState())
         private set
 
+    var isError by mutableStateOf(false)
+        private set
+
     fun onEvent(event: SignInEvent) {
         when (event) {
-            is SignInEvent.PhoneChanged -> {
-                state = state.copy(phone = event.phone)
+            is SignInEvent.EmailChanged -> {
+                state = state.copy(email = event.email)
             }
             is SignInEvent.PasswordChanged -> {
                 state = state.copy(password = event.password)
@@ -38,29 +42,54 @@ class SignInViewModel @Inject constructor(
     }
 
     private fun validateData(goToHome: () -> Unit) {
-        val phoneResult = validateFieldsUseCase.validatePhone(state.phone)
+        val emailResult = validateFieldsUseCase.validateEmail(state.email)
         val passwordResult = validateFieldsUseCase.validatePassword(state.password)
         val hasError = listOf(
-            phoneResult,
+            emailResult,
             passwordResult
         ).any { !it.successful }
 
         state = state.copy(
-            phoneError = phoneResult.errorMessage,
+            emailError = emailResult.errorMessage,
             passwordError = passwordResult.errorMessage
         )
 
         if (hasError)
             return
 
-        viewModelScope.launch {
-            signInUseCase.signIn(state.phone).catch {
+        signIn(goToHome)
+    }
 
-            }.collect {
-                if (it)
-                    goToHome()
+    private fun signIn(goToHome: () -> Unit) {
+        viewModelScope.launch {
+            signInUseCase.signIn(state.email, state.password).catch {
+                state = state.copy(
+                    isLoading = false
+                )
+                isError = true
+            }.collect { result ->
+                when(result) {
+                    is Resource.Error -> {
+                        state = state.copy(
+                            isLoading = false
+                        )
+                        isError = true
+                    }
+                    is Resource.Loading -> {
+                        state = state.copy(
+                            isLoading = true
+                        )
+                    }
+                    is Resource.Success -> {
+                        goToHome()
+                    }
+                }
             }
         }
+    }
+
+    fun hideMessageError() {
+        isError = false
     }
 
 }

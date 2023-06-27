@@ -1,29 +1,24 @@
 package com.dojo.globant.mymessenger.feature.sign_in.domain.usecase
 
 import com.dojo.globant.mymessenger.R
+import com.dojo.globant.mymessenger.common.Constants.REGEX_EMAIL
 import com.dojo.globant.mymessenger.common.util.UiText
 import com.dojo.globant.mymessenger.common.util.ValidationResult
 
 class ValidateFieldsUseCase {
 
-    fun validatePhone(phone: String) : ValidationResult {
-        phone.trim().apply {
+    fun validateEmail(email: String) : ValidationResult {
+        email.trim().apply {
             if (isBlank()) {
                 return ValidationResult(
                     successful = false,
                     errorMessage = UiText.StringResource(id = R.string.field_required_error)
                 )
             }
-            if (any { character -> !character.isDigit() }) {
+            if (!Regex(REGEX_EMAIL).matches(this)) {
                 return ValidationResult(
                     successful = false,
-                    errorMessage = UiText.StringResource(id = R.string.phone_invalid_error)
-                )
-            }
-            if (length < 10 || length > 10) {
-                return ValidationResult(
-                    successful = false,
-                    errorMessage = UiText.StringResource(id = R.string.phone_invalid_amount_digits)
+                    errorMessage = UiText.StringResource(id = R.string.email_invalid_error)
                 )
             }
         }

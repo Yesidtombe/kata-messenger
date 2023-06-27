@@ -69,6 +69,7 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
 
     // Coil
     implementation "io.coil-kt:coil-compose:$coilVersion"

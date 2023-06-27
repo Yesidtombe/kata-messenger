@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">MyMessenger</string>
     <string name="text_field_phone">Phone</string>
+    <string name="text_field_email">Email</string>
     <string name="text_field_password">Password</string>
     <string name="text_sign_in">Sign In</string>
     <string name="text_for_signing_up">First time here? Sign Up</string>
     <string name="field_required_error">This field is required</string>
     <string name="phone_invalid_error">The phone is invalid</string>
+    <string name="email_invalid_error">The email is invalid</string>
     <string name="phone_invalid_amount_digits">The phone must contain 10 digits</string>
     <string name="list_chat_item">Chats</string>
     <string name="new_chat_item">New</string>
@@ -15,4 +17,6 @@
     <string name="button_edit_profile">Edit profile</string>
     <string name="status_chat_person">Online</string>
     <string name="default_image_profile">Default image profile</string>
+    <string name="message_error_sign_in">There was an error with your credentials</string>
+    <string name="please_wait_message">Please wait</string>
 </resources>
